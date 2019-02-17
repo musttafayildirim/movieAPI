@@ -1,2 +1,3 @@
 # movieAPI
-Node.JS Movie API Uygulaması
+
+Bir movie API uygulaması yapacağım..

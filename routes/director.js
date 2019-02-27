@@ -17,6 +17,28 @@ router.post('/', (req, res) => {
  })
 });
 
+//yönetmen güncelleme
+router.put('/:director_id', (req, res, next) =>{
+    const promise = Director.findByIdAndUpdate(
+        req.params.director_id,
+        req.body,
+        {
+            new : true
+        }
+    );
+
+    promise.then((director) => {
+        res.json(director);
+    }).catch((err) => {
+        //burada eğer yönetmen bulunamadıysa onu yazdırdık...
+        if(err) {
+            next({message: 'İlgili yönetmen bulunamadı..'});
+        }
+        res.json(err);
+    });
+});
+
+
 
 router.get('/', (req, res) =>{
     const promise = Director.aggregate([
@@ -66,7 +88,7 @@ router.get('/', (req, res) =>{
     });
 });
 
-
+//idsine göre yönetmen gösterme...
 router.get('/:director_id', (req, res) =>{
     const promise = Director.aggregate([
         {
@@ -120,6 +142,27 @@ router.get('/:director_id', (req, res) =>{
         res.json(err);
     });
 });
+
+//yönetmen silme
+router.delete('/:director_id', (req, res, next) =>{
+    const promise = Director.findByIdAndRemove(
+        req.params.director_id,
+    );
+
+    promise.then((director) => {
+        if(!director) {
+            next({message: 'İlgili yönetmen bulunamadı..'});
+        }
+        res.json({status : 1});
+    }).catch((err) => {
+        //burada eğer film bulunamadıysa onu yazdırdık...
+
+        res.json(err);
+    });
+});
+
+
+
 
 
 

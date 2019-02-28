@@ -10,7 +10,11 @@ const MovieSchema = new Schema({
     },
     category: String,
     country : String,
-    year : Number,
+    year : {
+        type : Number,
+        max: 2039,
+        min: 1900
+    },
     imdb_score: Number,
     createdAt : {
         type: Date,

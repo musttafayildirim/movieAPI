@@ -21,6 +21,5 @@ module.exports = (req, res, next) => {
             massage : 'No token provided..'
         })
     }
-
 };
 
